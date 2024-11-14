@@ -1,5 +1,5 @@
 import { 
-    app, auth, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword 
+    app, auth, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword , signOut
 } 
 from './firebase.js'
 
@@ -66,6 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     const errorCode = error.code;
                     const errorMessage = error.message;
                     console.log(errorMessage);
+                    // alert("Invalid Information!")
                 });
         });
     } else {
@@ -87,7 +88,9 @@ logoutBtn.addEventListener('click', ()=>{
         //     icon: "success",
         //     confirmButtonText: "OK"
         // });
-        alert("Log out Successfully!")
+        alert("Log out Successfully!");
+        window.location.href = "./index.html";
+
     })
     .catch((error) => {
         console.error("Logout failed", error);
@@ -101,12 +104,17 @@ logoutBtn.addEventListener('click', ()=>{
 
 });
 
-let pass = document.getElementById('password');
-let mail = document.getElementById('email')
+let pass = document.getElementById('login-password').value;
+let mail = document.getElementById('login-email').value;
 
 let det = document.getElementById('getdetail')
 let details = document.getElementById('details');
 
+localStorage.setItem('password', pass);
+localStorage.setItem('email', mail);
+
 det.addEventListener('click', ()=>{
-    details.innerHTML = `Email : ${mail.value} <br> Passowrd : ${pass.value}`
+    details.innerHTML = `Email : ${localStorage.getItem(mail)} <br> Passowrd :  ${localStorage.getItem(pass)}`
+    console.log('hi');
+    
 })
