@@ -11,10 +11,19 @@
     https://cdn.jsdelivr.net/npm/sweetalert2@11.14.4/dist/sweetalert2.min.css
     " rel="stylesheet">
 
+    <style>
+      body{
+        background-color: lightpink;
+      }
+      .navbar{
+        background-color: palevioletred;
+      }
+    </style>
+
 </head>
 <body>
-    <div class="container">
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <!-- <div class="container"> -->
+        <nav class="navbar navbar-expand-lg">
             <div class="container-fluid">
               <a class="navbar-brand" href="#">Navbar</a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -50,12 +59,19 @@
               </div>
             </div>
           </nav>
-    </div>
-    <div class="container">
-        <h1 class="text-center" style="color: brown;">Hi!</h1>
-        <button class="btn btn-outline-danger" id="getdetail">Get Details</button>
-        <h3 id="details"></h3>
-    </div>
+    <!-- </div> -->
+    
+    <form id="myForm">
+      
+    <input type="text" placeholder="Write a Post" id="description" class="p-2">
+    <button type="submit" class="btn btn-outline-light">post</button>
+       </form>
+    
+       <h1>All Posts</h1>
+       <div id="displayPosts" class="d-flex gap-2 flex-wrap">
+       
+          </div>
+       </div>
 
     <script src="app.js" type="module"></script>
     <script src="firebase.js" type="module"></script>

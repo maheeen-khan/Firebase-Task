@@ -19,7 +19,8 @@ document.addEventListener("DOMContentLoaded", () => {
     //////Register///////////
     let registerBtn = document.getElementById('register');
 
-    if (registerBtn) {
+     if(registerBtn){
+    try {
         let registerFunc = () => {
             let email = document.getElementById('email');
             let password = document.getElementById('password');
@@ -40,14 +41,16 @@ document.addEventListener("DOMContentLoaded", () => {
         };
 
         registerBtn.addEventListener('click', registerFunc);
-    } else {
-        console.error("Register button not found in the DOM.");
+    } catch(e) {
+        console.error("Register button not found in the DOM.", e);
     }
-
+     }
     ///////Login/////////////
     let loginBtn = document.getElementById('login');
 
-    if (loginBtn) {
+    if(loginBtn){
+    try {
+        
         loginBtn.addEventListener("click", () => {
             let loginEmail = document.getElementById('login-email');
             let loginPassword = document.getElementById('login-password');
@@ -69,9 +72,10 @@ document.addEventListener("DOMContentLoaded", () => {
                     // alert("Invalid Information!")
                 });
         });
-    } else {
-        console.error("Login button not found in the DOM.");
+    } catch(e) {
+        console.error("Login button not found in the DOM.", e);
     }
+}
 });
 
 
@@ -104,17 +108,17 @@ logoutBtn.addEventListener('click', ()=>{
 
 });
 
-let pass = document.getElementById('login-password').value;
-let mail = document.getElementById('login-email').value;
+// let pass = document.getElementById('login-password').value;
+// let mail = document.getElementById('login-email').value;
 
-let det = document.getElementById('getdetail')
-let details = document.getElementById('details');
+// let det = document.getElementById('getdetail')
+// let details = document.getElementById('details');
 
-localStorage.setItem('password', pass);
-localStorage.setItem('email', mail);
+// localStorage.setItem('password', pass);
+// localStorage.setItem('email', mail);
 
-det.addEventListener('click', ()=>{
-    details.innerHTML = `Email : ${localStorage.getItem(mail)} <br> Passowrd :  ${localStorage.getItem(pass)}`
-    console.log('hi');
+// det.addEventListener('click', ()=>{
+//     details.innerHTML = `Email : ${localStorage.getItem(mail)} <br> Passowrd :  ${localStorage.getItem(pass)}`
+//     console.log('hi');
     
-})
+// })
