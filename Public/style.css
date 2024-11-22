@@ -6,3 +6,15 @@
     border-radius: 10px !important;
     border: none;
 }
+#user{
+    width: 45px;
+}
+.side:hover{
+    background-color: rgb(235, 94, 118);
+    color: white;
+    cursor: pointer;
+    border-radius: 9px;
+}
+#home{
+    width:20px;
+}
