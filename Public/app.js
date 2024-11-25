@@ -81,7 +81,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 ///////////////logout/////////////////
 let logoutBtn = document.getElementById('logout');
-
+if(logoutBtn){
 logoutBtn.addEventListener('click', ()=>{
 
     signOut(auth).then(() => {
@@ -107,6 +107,7 @@ logoutBtn.addEventListener('click', ()=>{
     });
 
 });
+}
 
 // let pass = document.getElementById('login-password').value;
 // let mail = document.getElementById('login-email').value;
