@@ -122,14 +122,32 @@ logoutBtn.addEventListener('click', ()=>{
 
     signOut(auth).then(() => {
         console.log("User logged out successfully");
-        // Swal.fire({
-        //     title: "Logged Out!",
-        //     text: "You have been logged out successfully.",
-        //     icon: "success",
-        //     confirmButtonText: "OK"
-        // });
-        alert("Log out Successfully!");
-        window.location.href = "./index.html";
+      
+        // alert("Log out Successfully!");
+        Swal.fire({
+            title: "Are you sure?",
+            text: "Do you really want to log out?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, log me out!"
+          }).then((result) => {
+            if (result.isConfirmed) {
+              Swal.fire({
+                title: 'Logged Out',
+                text: "You have been logged out.",
+                icon: "success",
+
+              });
+            }
+            setTimeout(()=>{
+                window.location.href = "./index.html";
+            }, 3000)
+            
+          });
+          
+        
 
     })
     .catch((error) => {
