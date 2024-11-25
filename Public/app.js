@@ -1,5 +1,6 @@
 import { 
-    app, auth, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword , signOut
+    app, auth, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword , signOut,  GoogleAuthProvider,
+    provider, signInWithPopup
 } 
 from './firebase.js'
 
@@ -114,17 +115,30 @@ logoutBtn.addEventListener('click', ()=>{
 });
 }
 
-// let pass = document.getElementById('login-password').value;
-// let mail = document.getElementById('login-email').value;
+let googleBtn = document.getElementById('google');
 
-// let det = document.getElementById('getdetail')
-// let details = document.getElementById('details');
-
-// localStorage.setItem('password', pass);
-// localStorage.setItem('email', mail);
-
-// det.addEventListener('click', ()=>{
-//     details.innerHTML = `Email : ${localStorage.getItem(mail)} <br> Passowrd :  ${localStorage.getItem(pass)}`
-//     console.log('hi');
+googleBtn.addEventListener('click', ()=>{
+    signInWithPopup(auth, provider)
+  .then((result) => {
+    // This gives you a Google Access Token. You can use it to access the Google API.
+    const credential = GoogleAuthProvider.credentialFromResult(result);
+    const token = credential.accessToken;
+    // The signed-in user info.
+    const user = result.user;
+    // IdP data available using getAdditionalUserInfo(result)
+    // ...
+  }).catch((error) => {
     
-// })
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    
+    console.log(errorMessage)
+    alert(errorMessage);
+
+    const email = error.customData.email;
+   
+    const credential = GoogleAuthProvider.credentialFromError(error);
+    
+  });
+
+})

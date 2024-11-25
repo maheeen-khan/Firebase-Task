@@ -28,3 +28,10 @@
 #spinner{
     display: none;
 }
+.line{
+    font-size: 15px;
+}
+.line a{
+    text-decoration: none;
+    color: rgb(192, 45, 70);
+}
