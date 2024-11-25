@@ -31,8 +31,20 @@ document.addEventListener("DOMContentLoaded", () => {
                     // Signed up
                     const user = userCredential.user;
                     console.log("User registered");
-                    alert("User registered");
-                    window.location.href = "./index.html";
+                    // alert("User registered");
+
+                    Swal.fire({
+                        position: "center",
+                        icon: "success",
+                        title: "Registration Successful!",
+                        text: 'Thank you for registering. Welcome aboard!',
+                        showConfirmButton: false,
+                        timer: 2000
+                      });
+
+                     setTimeout(() => {
+                        window.location.href = "./index.html";
+                    }, 2000);
 
                    
                 })
@@ -63,13 +75,31 @@ document.addEventListener("DOMContentLoaded", () => {
                 .then((userCredential) => {
                     // Signed in
                     const user = userCredential.user;
-                    alert("Login Successfully!");
+                    // alert("Login Successfully!");
+                   
+                    Swal.fire({
+                        title: "Login Successfully!",
+                        showClass: {
+                          popup: `
+                            animate__animated
+                            animate__fadeInUp
+                            animate__faster
+                          `
+                        },
+                        hideClass: {
+                          popup: `
+                            animate__animated
+                            animate__fadeOutDown
+                            animate__faster
+                          `
+                        }
+                      });
 
                     localStorage.setItem('name',loginEmail.value)
 
                     setTimeout(() => {
                         window.location.href = "./home.html";
-                    }, 3000);
+                    }, 2000);
                 })
                 .catch((error) => {
                     const errorCode = error.code;
