@@ -30,7 +30,10 @@ document.addEventListener("DOMContentLoaded", () => {
                     // Signed up
                     const user = userCredential.user;
                     console.log("User registered");
+                    alert("User registered");
                     window.location.href = "./index.html";
+
+                   
                 })
                 .catch((error) => {
                     const errorCode = error.code;
@@ -60,6 +63,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     // Signed in
                     const user = userCredential.user;
                     alert("Login Successfully!");
+
+                    localStorage.setItem('name',loginEmail.value)
 
                     setTimeout(() => {
                         window.location.href = "./home.html";

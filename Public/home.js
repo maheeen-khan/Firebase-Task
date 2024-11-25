@@ -39,3 +39,21 @@
 
 // }
 
+let edit = document.getElementById('edit')
+edit.addEventListener('click', ()=>{
+    
+    setTimeout(()=>{
+        window.location.href = './editProfile/editProfile.html'
+    }, 1000)
+})
+
+let username = localStorage.getItem('name')
+// username = JSON.parse(username)
+console.log(username)
+
+var newuser = username.split('@')[0]
+        
+
+let uName = document.getElementById('u-name')
+uName.innerHTML = `${newuser}`
+
