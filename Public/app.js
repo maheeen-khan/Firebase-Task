@@ -117,6 +117,7 @@ logoutBtn.addEventListener('click', ()=>{
 
 let googleBtn = document.getElementById('google');
 
+if(googleBtn){
 googleBtn.addEventListener('click', ()=>{
     signInWithPopup(auth, provider)
   .then((result) => {
@@ -131,7 +132,7 @@ googleBtn.addEventListener('click', ()=>{
     
     const errorCode = error.code;
     const errorMessage = error.message;
-    
+
     console.log(errorMessage)
     alert(errorMessage);
 
@@ -142,3 +143,4 @@ googleBtn.addEventListener('click', ()=>{
   });
 
 })
+}
