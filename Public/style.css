@@ -11,10 +11,17 @@
 }
 .side:hover{
     background-color: rgb(235, 94, 118);
-    color: white;
+    color: white !important;
     cursor: pointer;
     border-radius: 9px;
 }
 #home{
     width:20px;
+}
+.offcanvas a {
+    text-decoration: none !important;
+    color: black;
+}
+#editBtn:hover{
+    color: white !important;
 }

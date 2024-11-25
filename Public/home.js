@@ -38,10 +38,4 @@
 //     });
 
 // }
-document.addEventListener("DOMContentLoaded", function() {
-    var edit = document.getElementById('edit');
-    
-    edit.addEventListener('click', () => {
-        console.log('hi');
-    });
-});
+
