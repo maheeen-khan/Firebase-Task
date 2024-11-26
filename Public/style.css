@@ -42,3 +42,6 @@
     border-radius: 10px;
     width: 80%;
 }
+.backBtn{
+    width: 60px !important;
+}
