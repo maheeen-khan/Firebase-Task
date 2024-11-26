@@ -1,5 +1,5 @@
 import {
-  app, auth, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut, signInWithPopup, provider, GoogleAuthProvider
+  app, auth, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut, signInWithPopup, provider, GoogleAuthProvider, deleteUser
 }
   from './firebase.js'
 
@@ -159,6 +159,63 @@ if (logoutBtn) {
   });
 }
 
+//////////Delete account (de-activate account)
+
+let deActivateBtn = document.getElementById('deactive');
+deActivateBtn.addEventListener('click', ()=>{
+
+
+  const user = auth.currentUser;
+  
+  if (user) {
+    // Show confirmation dialog
+    Swal.fire({
+      title: "Are you sure?",
+      text: "This will permanently delete your account.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, delete my account",
+      cancelButtonText: "Cancel"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Delete the user
+        deleteUser(user)
+          .then(() => {
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your account has been deleted.",
+              icon: "success",
+              showConfirmButton: false,
+              timer: 2000
+            });
+
+            setTimeout(() => {
+              window.location.href = "./register.html"; // Redirect after deletion
+            }, 2000);
+          })
+          .catch((error) => {
+            console.error("Error deleting user:", error);
+            Swal.fire({
+              title: "Error",
+              text: "There was an error deleting your account. Please try again.",
+              icon: "error",
+              confirmButtonText: "OK"
+            });
+          });
+      }
+    });
+  } else {
+    console.log("No user is signed in.");
+  }
+})
+
+
+
+/////google authentication
+
+
 let googleBtn = document.getElementById('google');
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -188,8 +245,5 @@ if (googleBtn) {
       });
 
   })
-}
-else {
-  console.error("Google sign-in button not found.");
 }
 });

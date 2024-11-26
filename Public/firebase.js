@@ -9,7 +9,7 @@ import {
     signOut,
     signInWithPopup,
     GoogleAuthProvider,
-   
+    deleteUser,
 
 }
     from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
@@ -46,5 +46,5 @@ const db = getFirestore(app);
 
 
 export {
-    app, auth, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut, db, getFirestore, collection, addDoc, getDocs,Timestamp, query, orderBy, limit,doc, deleteDoc, signInWithPopup,  GoogleAuthProvider, provider
+    app, auth, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut, db, getFirestore, collection, addDoc, getDocs,Timestamp, query, orderBy, limit,doc, deleteDoc, signInWithPopup,  GoogleAuthProvider, provider, deleteUser
 }
