@@ -1,156 +1,155 @@
-import { 
-    app, auth, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword , signOut,  GoogleAuthProvider,
-    provider, signInWithPopup
-} 
-from './firebase.js'
+import {
+  app, auth, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut, signInWithPopup, provider, GoogleAuthProvider
+}
+  from './firebase.js'
 
 //Auth//
 onAuthStateChanged(auth, (user) => {
-    if (user) {
-      // User is signed in
-      const uid = user.uid;
-      console.log("user exists", user);
-    } else {
-      // User is signed out
-      console.log("user does not exist", user);
-    }
+  if (user) {
+    // User is signed in
+    const uid = user.uid;
+    console.log("user exists", user);
+  } else {
+    // User is signed out
+    console.log("user does not exist", user);
+  }
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-    //////Register///////////
-    let registerBtn = document.getElementById('register');
+  //////Register///////////
+  let registerBtn = document.getElementById('register');
 
-     if(registerBtn){
+  if (registerBtn) {
     try {
-        let registerFunc = () => {
-            let email = document.getElementById('email');
-            let password = document.getElementById('password');
+      let registerFunc = () => {
+        let email = document.getElementById('email');
+        let password = document.getElementById('password');
 
-            createUserWithEmailAndPassword(auth, email.value, password.value)
-                .then((userCredential) => {
-                    // Signed up
-                    const user = userCredential.user;
-                    console.log("User registered");
-                    // alert("User registered");
+        createUserWithEmailAndPassword(auth, email.value, password.value)
+          .then((userCredential) => {
+            // Signed up
+            const user = userCredential.user;
+            console.log("User registered");
+            // alert("User registered");
 
-                    Swal.fire({
-                        position: "center",
-                        icon: "success",
-                        title: "Registration Successful!",
-                        text: 'Thank you for registering. Welcome aboard!',
-                        showConfirmButton: false,
-                        timer: 2000
-                      });
+            Swal.fire({
+              position: "center",
+              icon: "success",
+              title: "Registration Successful!",
+              text: 'Thank you for registering. Welcome aboard!',
+              showConfirmButton: false,
+              timer: 2000
+            });
 
-                     setTimeout(() => {
-                        window.location.href = "./index.html";
-                    }, 2000);
+            setTimeout(() => {
+              window.location.href = "./index.html";
+            }, 2000);
 
-                   
-                })
-                .catch((error) => {
-                    const errorCode = error.code;
-                    const errorMessage = error.message;
-                    console.log("User registration failed");
-                    console.log(errorMessage);
-                });
-        };
 
-        registerBtn.addEventListener('click', registerFunc);
-    } catch(e) {
-        console.error("Register button not found in the DOM.", e);
+          })
+          .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.log("User registration failed");
+            console.log(errorMessage);
+          });
+      };
+
+      registerBtn.addEventListener('click', registerFunc);
+    } catch (e) {
+      console.error("Register button not found in the DOM.", e);
     }
-     }
-    ///////Login/////////////
-    let loginBtn = document.getElementById('login');
+  }
+  ///////Login/////////////
+  let loginBtn = document.getElementById('login');
 
-    if(loginBtn){
+  if (loginBtn) {
     try {
-        
-        loginBtn.addEventListener("click", () => {
-            let loginEmail = document.getElementById('login-email');
-            let loginPassword = document.getElementById('login-password');
 
-            signInWithEmailAndPassword(auth, loginEmail.value, loginPassword.value)
-                .then((userCredential) => {
-                    // Signed in
-                    const user = userCredential.user;
-                    // alert("Login Successfully!");
-                   
-                    Swal.fire({
-                        title: "Login Successfully!",
-                        showClass: {
-                          popup: `
+      loginBtn.addEventListener("click", () => {
+        let loginEmail = document.getElementById('login-email');
+        let loginPassword = document.getElementById('login-password');
+
+        signInWithEmailAndPassword(auth, loginEmail.value, loginPassword.value)
+          .then((userCredential) => {
+            // Signed in
+            const user = userCredential.user;
+            // alert("Login Successfully!");
+
+            Swal.fire({
+              title: "Login Successfully!",
+              showClass: {
+                popup: `
                             animate__animated
                             animate__fadeInUp
                             animate__faster
                           `
-                        },
-                        hideClass: {
-                          popup: `
+              },
+              hideClass: {
+                popup: `
                             animate__animated
                             animate__fadeOutDown
                             animate__faster
                           `
-                        }
-                      });
+              }
+            });
 
-                    localStorage.setItem('name',loginEmail.value)
+            localStorage.setItem('name', loginEmail.value)
 
-                    setTimeout(() => {
-                        window.location.href = "./home.html";
-                    }, 2000);
-                })
-                .catch((error) => {
-                    const errorCode = error.code;
-                    const errorMessage = error.message;
-                    console.log(errorMessage);
-                    // alert("Invalid Information!")
-                });
-        });
-    } catch(e) {
-        console.error("Login button not found in the DOM.", e);
+            setTimeout(() => {
+              window.location.href = "./home.html";
+            }, 2000);
+          })
+          .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.log(errorMessage);
+            // alert("Invalid Information!")
+          });
+      });
+    } catch (e) {
+      console.error("Login button not found in the DOM.", e);
     }
-}
+  }
 });
 
 
 ///////////////logout/////////////////
 let logoutBtn = document.getElementById('logout');
-if(logoutBtn){
-logoutBtn.addEventListener('click', ()=>{
+if (logoutBtn) {
+  logoutBtn.addEventListener('click', () => {
 
     signOut(auth).then(() => {
-        console.log("User logged out successfully");
-      
-        // alert("Log out Successfully!");
-        Swal.fire({
-            title: "Are you sure?",
-            text: "Do you really want to log out?",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, log me out!"
-          }).then((result) => {
-            if (result.isConfirmed) {
-              Swal.fire({
-                title: 'Logged Out',
-                text: "You have been logged out.",
-                icon: "success",
+      console.log("User logged out successfully");
 
-              });
-            }
-            setTimeout(()=>{
-                window.location.href = "./index.html";
-            }, 3000)
-            
+      // alert("Log out Successfully!");
+      Swal.fire({
+        title: "Are you sure?",
+        text: "Do you really want to log out?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, log me out!"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire({
+            title: 'Logged Out',
+            text: "You have been logged out.",
+            icon: "success",
+
           });
-          
-        
+        }
+        setTimeout(() => {
+          window.location.href = "./index.html";
+        }, 3000)
+
+      });
+
+
 
     })
-    .catch((error) => {
+      .catch((error) => {
         console.error("Logout failed", error);
         // Swal.fire({
         //     title: "Error",
@@ -158,37 +157,40 @@ logoutBtn.addEventListener('click', ()=>{
         //     icon: "error",
         //     confirmButtonText: "Try Again"
         // });
-    });
+      });
 
-});
+  });
 }
 
 let googleBtn = document.getElementById('google');
-
-if(googleBtn){
-googleBtn.addEventListener('click', ()=>{
+document.addEventListener("DOMContentLoaded", () => {
+if (googleBtn) {
+  googleBtn.addEventListener('click', () => {
     signInWithPopup(auth, provider)
-  .then((result) => {
-    // This gives you a Google Access Token. You can use it to access the Google API.
-    const credential = GoogleAuthProvider.credentialFromResult(result);
-    const token = credential.accessToken;
-    // The signed-in user info.
-    const user = result.user;
-    // IdP data available using getAdditionalUserInfo(result)
-    // ...
-  }).catch((error) => {
+      .then((result) => {
+
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+
+        const user = result.user;
+        console.log(token);
+        console.log(user);
+
+        window.location.href = './home.html'
+
+      }).catch((error) => {
     
-    const errorCode = error.code;
-    const errorMessage = error.message;
+        
+        const errorMessage = error.message;
+        console.log(errorMessage);
 
-    console.log(errorMessage)
-    alert(errorMessage);
+        const credential = GoogleAuthProvider.credentialFromError(error);
 
-    const email = error.customData.email;
-   
-    const credential = GoogleAuthProvider.credentialFromError(error);
-    
-  });
+      });
 
-})
+  })
 }
+else {
+  console.error("Google sign-in button not found.");
+}
+});

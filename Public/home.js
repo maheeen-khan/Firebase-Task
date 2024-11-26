@@ -78,8 +78,8 @@ let username = localStorage.getItem('name')
 console.log(username)
 
 var newuser = username.split('@')[0]
-
+let nameOnly = newuser.replace(/[0-9]/g, "");
 
 let uName = document.getElementById('u-name')
-uName.innerHTML = `${newuser}`
+uName.innerHTML = `${nameOnly}`
 
