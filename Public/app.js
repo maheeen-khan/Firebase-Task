@@ -116,54 +116,53 @@ document.addEventListener("DOMContentLoaded", () => {
 
 ///////////////logout/////////////////
 let logoutBtn = document.getElementById('logout');
+
 if (logoutBtn) {
   logoutBtn.addEventListener('click', () => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Do you really want to log out?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, log me out!",
+      cancelButtonText: "Cancel"
+    }).then((result) => {
+      // Only log out if the user confirmed
+      if (result.isConfirmed) {
+        signOut(auth)
+          .then(() => {
+            Swal.fire({
+              title: 'Logged Out',
+              text: "You have been logged out.",
+              icon: "success",
+              showConfirmButton: false,
+              timer: 2000
+            });
 
-    signOut(auth).then(() => {
-      console.log("User logged out successfully");
-
-      // alert("Log out Successfully!");
-      Swal.fire({
-        title: "Are you sure?",
-        text: "Do you really want to log out?",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, log me out!"
-      }).then((result) => {
-        if (result.isConfirmed) {
-          Swal.fire({
-            title: 'Logged Out',
-            text: "You have been logged out.",
-            icon: "success",
-
+            setTimeout(() => {
+              window.location.href = "./index.html";
+            }, 2000); // Redirect after showing success message
+          })
+          .catch((error) => {
+            console.error("Logout failed", error);
+            Swal.fire({
+              title: "Error",
+              text: "An error occurred during logout. Please try again.",
+              icon: "error",
+              confirmButtonText: "OK"
+            });
           });
-        }
-        setTimeout(() => {
-          window.location.href = "./index.html";
-        }, 3000)
-
-      });
-
-
-
-    })
-      .catch((error) => {
-        console.error("Logout failed", error);
-        // Swal.fire({
-        //     title: "Error",
-        //     text: "An error occurred during logout.",
-        //     icon: "error",
-        //     confirmButtonText: "Try Again"
-        // });
-      });
-
+      }
+    });
   });
 }
 
 let googleBtn = document.getElementById('google');
+
 document.addEventListener("DOMContentLoaded", () => {
+
 if (googleBtn) {
   googleBtn.addEventListener('click', () => {
     signInWithPopup(auth, provider)
