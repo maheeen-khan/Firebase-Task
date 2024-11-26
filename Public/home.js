@@ -40,7 +40,7 @@
 // }
 
 let edit = document.getElementById('edit');
-
+if(edit){
 edit.addEventListener('click', () => {
 
     let timerInterval;
@@ -72,14 +72,20 @@ edit.addEventListener('click', () => {
         window.location.href = './editProfile/editProfile.html'
     }, 2000)
 })
+}
 
-let username = localStorage.getItem('name')
+// let useremail = localStorage.getItem('email')
 // username = JSON.parse(username)
-console.log(username)
+// console.log(useremail)
 
-var newuser = username.split('@')[0]
-let nameOnly = newuser.replace(/[0-9]/g, "");
+// var newuser = useremail.split('@')[0]
+// let nameOnly = newuser.replace(/[0-9]/g, "");
+
+let username = localStorage.getItem('name');
 
 let uName = document.getElementById('u-name')
-uName.innerHTML = `${nameOnly}`
+uName.innerHTML = `${username}`
+
+// localStorage.setItem('name', nameOnly);
+
 

@@ -1,18 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="../../bootstrap-5.3.3-dist/css/bootstrap.min.css">
+      <!-- sweet alert css -->
+  <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
 </head>
+
+    <!-- sweet alert js -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</head>
+
 <body>
     <h1 class="text-center mt-5">Edit Profile</h1>
+    <div class="container  text-center">
+        <div class="row  mx-auto">
+            <div class="col-lg-6 col-md-6 col-sm-12 offset-lg-3 offset-md-3">
+                <div class="u-img">
+                    <img src="../../images/user-removebg-preview.png" alt="" class="userImg img-fluid w-50">
+                </div>
+            </div>
+        </div>
 
-
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12 offset-lg-3 offset-md-3 border">
+                <input type="text" name="user-name" id="user-name" disabled class="p-2 m-1"> <br>
+                <button class="btn btn-secondary mt-3 px-5" id="editName">Edit</button>
+                <button class="btn btn-success mt-3 px-5" id="done">Done</button>
+            </div>
+        </div>
+    </div>
     <script src="../../bootstrap-5.3.3-dist/js/bootstrap.min.js"></script>
     <script src="../firebase.js" type="module"></script>
+    <script src="../home.js" type="module"></script>
     <script src="./editProfile.js"></script>
 </body>
+
 </html>

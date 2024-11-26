@@ -35,3 +35,10 @@
     text-decoration: none;
     color: rgb(192, 45, 70);
 }
+.userImg:hover{
+    filter:opacity(0.5);
+}
+#user-name{
+    border-radius: 10px;
+    width: 80%;
+}

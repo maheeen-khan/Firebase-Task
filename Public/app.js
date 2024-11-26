@@ -94,7 +94,13 @@ document.addEventListener("DOMContentLoaded", () => {
               }
             });
 
-            localStorage.setItem('name', loginEmail.value)
+            let newuser = user.email.split('@')[0];  // Get part before '@'
+            let nameOnly = newuser.replace(/[0-9]/g, ""); // Remove numbers from the name part
+    
+            // Store name in localStorage
+            localStorage.setItem('name', nameOnly);
+    
+            localStorage.setItem('email', loginEmail.value)
 
             setTimeout(() => {
               window.location.href = "./home.html";
