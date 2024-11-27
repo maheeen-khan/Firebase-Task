@@ -88,4 +88,13 @@ uName.innerHTML = `${username}`
 
 // localStorage.setItem('name', nameOnly);
 
+let homeDp = localStorage.getItem('profileImageUrl')
+// document.querySelectorAll('#user').src = homeDp;
+console.log(document.querySelectorAll('#user'));
 
+let dp = document.querySelectorAll('#user');
+dp.forEach(i => {
+    // console.log(i.src);
+    i.src = homeDp
+    
+});

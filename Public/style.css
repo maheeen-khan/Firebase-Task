@@ -8,6 +8,7 @@
 }
 #user{
     width: 45px;
+    border-radius: 50%;
 }
 .side:hover{
     background-color: rgb(235, 94, 118);

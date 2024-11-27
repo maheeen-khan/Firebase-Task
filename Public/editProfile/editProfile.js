@@ -1,14 +1,15 @@
+let uploadPreset = 'wmbrbjnt';
+let cloudName = 'dlny0bzx6';
 
+// Manage username
+let username = localStorage.getItem('name');
+const inpField = document.getElementById('user-name');
+inpField.value = username;
 
-let username = localStorage.getItem('name')
-
-let inpField = document.getElementById('user-name')
-inpField.value = username
-
+// "Done" button: Save and disable editing of the name
 document.getElementById('done').addEventListener('click', () => {
-    localStorage.setItem('name', inpField.value)
-    inpField.disabled = true;
-    // alert('Name updated successfully!');
+    localStorage.setItem('name', inpField.value); // Save name to local storage
+    inpField.disabled = true; // Disable input field
     Swal.fire({
         position: "center",
         icon: "success",
@@ -16,22 +17,22 @@ document.getElementById('done').addEventListener('click', () => {
         showConfirmButton: false,
         timer: 1500
     });
-})
+});
 
+// "Edit Name" button: Enable editing of the name
 document.getElementById('editName').addEventListener('click', () => {
-    inpField.disabled = false;
-    inpField.focus();
-})
+    inpField.disabled = false; // Enable input field
+    inpField.focus(); // Focus the input field for editing
+});
 
-//change profile 
-
+// Manage profile image
 const image = document.getElementById('uploadImage');
 const fileInput = document.getElementById('fileInput');
 
-// Check if there's an image saved in local storage
-const savedImage = localStorage.getItem('uploadedImage');
-if (savedImage) {
-    image.src = savedImage; // Load saved image on page reload
+// Load saved profile image URL from localStorage (if it exists)
+const savedImageUrl = localStorage.getItem('profileImageUrl');
+if (savedImageUrl) {
+    image.src = savedImageUrl; // Set the image source to the saved URL
 }
 
 // Add a click event listener to the image
@@ -40,17 +41,56 @@ image.addEventListener('click', () => {
 });
 
 // Handle file input change event
-fileInput.addEventListener('change', (event) => {
+fileInput.addEventListener('change', async (event) => {
     const file = event.target.files[0]; // Get the selected file
 
     if (file) {
-        // Use FileReader to display the selected image
+        // Display the selected image locally while uploading
         const reader = new FileReader();
         reader.onload = (e) => {
             const imageData = e.target.result;
-            image.src = imageData; // Update image source
-            localStorage.setItem('uploadedImage', imageData); // Save image data to local storage
+            image.src = imageData; // Temporarily show the image
         };
         reader.readAsDataURL(file);
+
+        // Save to Cloudinary
+        const formData = new FormData();
+        formData.append("file", file);
+        formData.append("folder", "profilePicture");
+        formData.append("upload_preset", uploadPreset);
+
+        try {
+            let response = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/upload`, {
+                method: "POST",
+                body: formData,
+            });
+
+            const result = await response.json();
+            console.log('Uploaded to Cloudinary:', result);
+
+            if (result.secure_url) {
+                image.src = result.secure_url; // Update image source with Cloudinary URL
+
+                // Save the Cloudinary URL to localStorage
+                localStorage.setItem('profileImageUrl', result.secure_url);
+
+                Swal.fire({
+                    position: "center",
+                    icon: "success",
+                    title: "Profile picture updated successfully!",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            }
+        } catch (err) {
+            console.error("Error uploading to Cloudinary:", err);
+            Swal.fire({
+                position: "center",
+                icon: "error",
+                title: "Failed to upload image!",
+                text: "Please try again.",
+                showConfirmButton: true
+            });
+        }
     }
 });
