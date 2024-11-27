@@ -168,6 +168,7 @@ if (logoutBtn) {
 //////////Delete account (de-activate account)
 
 let deActivateBtn = document.getElementById('deactive');
+if(deActivateBtn){
 deActivateBtn.addEventListener('click', ()=>{
 
 
@@ -216,7 +217,7 @@ deActivateBtn.addEventListener('click', ()=>{
     console.log("No user is signed in.");
   }
 })
-
+}
 
 
 /////google authentication
