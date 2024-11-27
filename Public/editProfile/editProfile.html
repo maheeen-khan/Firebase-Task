@@ -7,18 +7,21 @@
     <title>Document</title>
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="../../bootstrap-5.3.3-dist/css/bootstrap.min.css">
-      <!-- sweet alert css -->
-  <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+    <!-- sweet alert css -->
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
 
-  <style>
-    body{
-        background-color: rgb(239, 239, 239);
-    }
-  </style>
+    <style>
+        body {
+            background-color: rgb(239, 239, 239);
+        }
+        #uploadImage{
+            border-radius: 50%;
+        }
+    </style>
 </head>
 
-    <!-- sweet alert js -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<!-- sweet alert js -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </head>
 
@@ -28,16 +31,30 @@
     <div class="container  text-center">
 
 
-        <div class="row  mx-auto">
+        <div class="row  mx-auto my-4">
             <div class="col-lg-6 col-md-6 col-sm-12 offset-lg-3 offset-md-3">
                 <div class="u-img">
-                    <img src="../../images/user-removebg-preview.png" alt="" class="userImg img-fluid w-50" title="change profile">
+                    <img src="../../images/user-removebg-preview.png" alt="" class="userImg img-fluid w-50"
+                        title="change profile" id="uploadImage">
+
+                    <!-- Hidden file input -->
+                    <input id="fileInput" type="file" style="display: none;">
                 </div>
             </div>
         </div>
 
         <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-12 offset-lg-3 offset-md-3 border" style="background-color: white; border-radius: 11px;">
+
+            <div class="col-3 col-lg-3 col-md-3 col-sm-12 align-content-center back1">
+                <button type="button" class="btn mt-4">
+                    <a href="../home.html">
+                        <img src="../../images/back-removebg-preview.png" alt="" class="img-fluid backBtn">
+                    </a>
+                </button>
+            </div>
+
+            <div class="col-lg-6 col-md-6 col-sm-12 border"
+                style="background-color: white; border-radius: 11px;">
                 <p style="text-align: left; color: green;" class="ps-lg-5 ps-md-5 mt-3 yourname">Your name</p>
                 <input type="text" name="user-name" id="user-name" disabled class="p-2"> <br>
                 <button class="btn btn-secondary my-3 px-5" id="editName">Edit</button>
@@ -45,13 +62,13 @@
             </div>
         </div>
 
-        <div class="row">
-            <button type="button" class="btn mt-4">
-                <a href="../home.html">
+      <div class="row back2">
+        <button type="button" class="btn mt-4 back2">
+            <a href="../home.html">
                 <img src="../../images/back-removebg-preview.png" alt="" class="img-fluid backBtn">
             </a>
-            </button>
-        </div>
+        </button>
+      </div>
     </div>
     <script src="../../bootstrap-5.3.3-dist/js/bootstrap.min.js"></script>
     <script src="../firebase.js" type="module"></script>

@@ -47,10 +47,24 @@
     width: 60px !important;
 }
 
-
+.back2{
+    display: none;
+}
 @media screen and (max-width: 426px){
     .yourname{
         text-align: center !important;
         /* padding-left: 32px !important; */
+    }
+    .back1{
+        display: none;
+    }
+    .back2{
+        display: block;
+    }
+}
+
+@media screen  and (min-width:768px){
+    .back2{
+        display: none !important;
     }
 }
