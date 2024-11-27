@@ -28,12 +28,12 @@ document.getElementById('editName').addEventListener('click', () => {
 // Manage profile image
 const image = document.getElementById('uploadImage');
 const fileInput = document.getElementById('fileInput');
+const removeDPbtn = document.getElementById('removeDPbtn');
+const defaultImageUrl = "../../images/user-removebg-preview.png"; // Default profile image path
 
 // Load saved profile image URL from localStorage (if it exists)
 const savedImageUrl = localStorage.getItem('profileImageUrl');
-if (savedImageUrl) {
-    image.src = savedImageUrl; // Set the image source to the saved URL
-}
+image.src = savedImageUrl ? savedImageUrl : defaultImageUrl; // Use saved URL or default image
 
 // Add a click event listener to the image
 image.addEventListener('click', () => {
@@ -93,4 +93,18 @@ fileInput.addEventListener('change', async (event) => {
             });
         }
     }
+});
+
+// Handle "Remove Profile" button
+removeDPbtn.addEventListener('click', () => {
+    image.src = defaultImageUrl; // Set the image to the default profile picture
+    localStorage.setItem('profileImageUrl', defaultImageUrl); // Update localStorage with the default image
+
+    Swal.fire({
+        position: "center",
+        icon: "info",
+        title: "Profile picture removed!",
+        showConfirmButton: false,
+        timer: 1500
+    });
 });

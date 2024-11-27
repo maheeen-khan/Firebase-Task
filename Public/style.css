@@ -9,6 +9,7 @@
 #user{
     width: 45px;
     border-radius: 50%;
+    height: 45px;
 }
 .side:hover{
     background-color: rgb(235, 94, 118);
@@ -51,6 +52,34 @@
 .back2{
     display: none;
 }
+#uploadImage{
+    height: 250px;
+    width: 250px;
+    border-radius: 50%;
+}
+@media screen and (max-width:320px) {
+    #uploadImage{
+        height: 130px;
+        width: 130px;
+        border-radius: 50%;
+    }
+}
+@media screen and (min-width:321px) and (max-width: 375px) {
+    #uploadImage{
+        height: 100px !important;
+        width: 140px !important;
+        border-radius: 50%;
+    }
+}
+
+@media screen and (min-width:426px) and (max-width: 768px) {
+    #uploadImage{
+        height: 200px !important;
+        width: 200px !important;
+        border-radius: 50%;
+    }
+}
+
 @media screen and (max-width: 426px){
     .yourname{
         text-align: center !important;
@@ -62,6 +91,7 @@
     .back2{
         display: block;
     }
+   
 }
 
 @media screen  and (min-width:768px){
