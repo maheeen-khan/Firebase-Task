@@ -40,6 +40,7 @@
 }
 #user-name{
     border-radius: 10px;
+    border: none;
     width: 80%;
 }
 .backBtn{
